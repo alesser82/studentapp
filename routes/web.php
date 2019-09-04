@@ -11,21 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    $page = 'homepage';
-    return view('pages/homepage', compact('page'));
-});
+// Route::get('/', function () {
+    // $page = 'homepage';
+    // return view('pages/homepage', compact('page'));
 
-Route::get('/about', function () {
-    $page = 'about';
-    return view('pages/about', compact('page'));
-});
+// });
+Route::get('/','PagesController@homepage');
 
-Route::get('/student', function () {
-    $page = 'student';
-    $students = ['Edd', 'John Marison', 'Mary Akh', 'Broke Lesnar'];
-    return view('student/index', compact('page','students'));
-});
+Route::get('/about','PagesController@about');
+
+Route::get('/student','StudentController@index');
 
 Route::get('/secretpage',['as' => 'secret', function()
 {
