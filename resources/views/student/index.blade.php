@@ -21,5 +21,6 @@
         <li>Student's empty</li>
     @endif
     </ul>
+    <a href="{{url('student/create')}}">Add Student</a>
     </div>
 @stop

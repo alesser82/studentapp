@@ -21,13 +21,22 @@ Route::get('/','PagesController@homepage');
 Route::get('/about','PagesController@about');
 
 Route::get('/student','StudentController@index');
+Route::get('/student/create','StudentController@create');
+Route::post('student', 'StudentController@store');
 
-Route::get('/secretpage',['as' => 'secret', function()
-{
-    return "This secret's page";
-}]);
+Route::get('secret-page', [
+    'as'    => 'secret',
+    'uses'  => 'SecretController@secretPage'
+]);
 
-Route::get('showmesecret', function()
-{
-    return redirect()->route('secret');
-});
+Route::get('showmesecret', 'SecretController@showMeSecret');
+
+// Route::get('/secretpage', function()
+// {
+//     return "This secret's page";
+// })->name('secret');
+
+// Route::get('showmesecret', function()
+// {
+//     return redirect()->route('secret');
+// });
