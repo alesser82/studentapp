@@ -13,16 +13,7 @@
 <body>
 @include('navbar')
 @yield('main')
-
-    <footer class="fixed-bottom p-4 bg-light">
-        <div class="row m-0">
-            <div class="col-12">
-                <div class="container">
-                    <span>&copy; 2019 Muhammad Ramadhan</span>
-                </div>
-            </div>
-        </div>
-    </footer>
+@yield('footer')
     {{-- JQuery --}}
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 </body>

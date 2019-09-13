@@ -10,20 +10,20 @@
             <input type="text" name="nisn" id="nisn" class="form-control">
         </div>
         <div class="form-group">
-            <label for="student_name">Nama Siswa</label>
-            <input type="text" name="student_name" id="student_name" class="form-control">
+            <label for="nama_siswa">Nama Siswa</label>
+            <input type="text" name="nama_siswa" id="nama_siswa" class="form-control">
         </div>
         <div class="form-group">
-            <label for="birthday">Tanggal Lahir</label>
-            <input type="date" name="birthday" id="birthday" class="form-control">
+            <label for="tanggal_lahir">Tanggal Lahir</label>
+            <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control">
         </div>
         <div class="form-group">
-            <label for="gender">Jenis Kelamin :</label>
+            <label for="jenis_kelamin">Jenis Kelamin :</label>
             <div class="custom-radio">
-                <label for=""><input type="radio" name="gender" id="gender"> Laki-laki</label>
+                <label for=""><input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="L"> Laki-laki</label>
             </div>
             <div class="custom-radio">
-                <label for=""><input type="radio" name="gender" id="gender"> Perempuan</label>
+                <label for=""><input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="P"> Perempuan</label>
             </div>
         </div>
         <div class="form-group">
