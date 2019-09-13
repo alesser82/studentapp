@@ -8,6 +8,7 @@ class Student extends Model
 {
     protected $table = 'student';
 
+    // create mass assignment
     protected $fillable = [
         'nisn',
         'nama_siswa',

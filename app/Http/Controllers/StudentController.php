@@ -9,24 +9,21 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $page = 'student';
         $siswa_list = Student::all()->sortBy('nama_siswa');
         $jumlah_siswa = $siswa_list->count();
         // $createLink = $this->create();
-        return view('student.index', compact('page','siswa_list', 'jumlah_siswa'));
+        return view('student.index', compact('siswa_list', 'jumlah_siswa'));
     }
 
     public function show($id)
     {
-        $page = 'student';
         $siswa = Student::findOrFail($id);
-        return view('student.show', compact('page', 'siswa'));
+        return view('student.show', compact( 'siswa'));
     }
 
     public function create()
     {
-        $page = 'student';
-        return view('student.create',compact('page'));
+        return view('student.create');
     }
 
     public function store(Request $request)
@@ -43,4 +40,19 @@ class StudentController extends Controller
         return redirect('student');
     }
 
+    public function edit($id)
+    {
+        $siswa = Student::findOrFail($id);
+        return view('student.edit', compact('siswa'));
+    }
+
+    public function update($id, Request $request)
+    {
+        // Find data
+        $siswa = Student::findOrFail($id);
+
+        // Update
+        $siswa->update($request->all());
+        return redirect('student');
+    }
 }

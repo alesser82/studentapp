@@ -23,6 +23,8 @@ Route::get('/about','PagesController@about');
 Route::get('/student','StudentController@index');
 Route::get('/student/create','StudentController@create');
 Route::get('/student/{student}','StudentController@show');
+Route::get('/student/{student}/edit','StudentController@edit');
+Route::patch('/student/{student}','StudentController@update');
 Route::post('student', 'StudentController@store');
 
 Route::get('secret-page', [

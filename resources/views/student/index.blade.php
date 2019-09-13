@@ -21,7 +21,10 @@
                     <td>{{ $siswa->nama_siswa }}</td>
                     <td>{{ $siswa->tanggal_lahir }}</td>
                     <td>{{ $siswa->jenis_kelamin }}</td>
-                    <td><a href="{{ URL::to('student/'.$siswa->id) }}" class="btn btn-success btn-sm">Detail</a></td>
+                    <td>
+                        <a href="{{ URL::to('student/'.$siswa->id) }}" class="btn btn-success btn-sm">Detail</a>
+                        <a href="{{ URL::to('student/'.$siswa->id.'/edit') }}" class="btn btn-warning btn-sm">Ubah</a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

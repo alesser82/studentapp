@@ -8,13 +8,11 @@ class PagesController extends Controller
 {
     public function homepage()
     {
-        $page = 'homepage';
-        return view('pages.homepage', compact('page'));
+        return view('pages.homepage');
     }
 
     public function about()
     {
-        $page = 'about';
-        return view('pages.about', compact('page'));
+        return view('pages.about');
     }
 }
