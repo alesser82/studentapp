@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Student;
+use App\Telephone;
 use Validator;
 
 class StudentController extends Controller
@@ -51,6 +52,7 @@ class StudentController extends Controller
             'nisn'          => 'required|size:4|unique:student,nisn',
             'nama_siswa'    => 'required|string|max:30',
             'tanggal_lahir' => 'required|date',
+            'nomor_telepon' => 'sometimes|numeric|digits_between:10,15|unique:telephone,nomor_telepon',
             'jenis_kelamin' => 'required|in:L,P',
         ]);
 
@@ -59,7 +61,10 @@ class StudentController extends Controller
             ->withInput()
             ->withErrors($validator);
         }else {
-            Student::create($input);
+            $telepon = new Telephone;
+            $telepon->nomor_telepon = $request->input('nomor_telepon');
+            $siswa = Student::create($input);
+            $siswa->telephone()->save($telepon);
             return redirect('student');
         }
     }
@@ -67,6 +72,9 @@ class StudentController extends Controller
     public function edit($id)
     {
         $siswa = Student::findOrFail($id);
+        if (!empty($siswa->telephone->nomor_telepon)) {
+            $siswa->nomor_telepon = $siswa->telephone->nomor_telepon;
+        }
         return view('student.edit', compact('siswa'));
     }
 
@@ -86,10 +94,11 @@ class StudentController extends Controller
 
         // config validator
         $validator = Validator::make($input, [
-            'nisn'          => 'required|size:4|unique:student,nisn,' . $request->id,
+            'nisn'          => 'required|size:4|unique:student,nisn,' . $request->input('id'),
             'nama_siswa'    => 'required|string|max:30',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:L,P',
+            'nomor_telepon' => 'sometimes|nullable|numeric|digits_between:10,15|unique:telephone,nomor_telepon,'. $request->input('id') . ',id_siswa',
         ]);
 
         if ($validator->fails()) {
@@ -98,6 +107,28 @@ class StudentController extends Controller
             ->withErrors($validator);
         }else {
             $siswa->update($request->all());
+
+            // if previous telephone column is required -> update
+            if ($siswa->telephone) {
+                // if telephone required -> update
+                if ($request->filled('nomor_telepon')) {
+                    $telepon = $siswa->telephone;
+                    $telepon->nomor_telepon = $request->input('nomor_telepon');
+                    $siswa->telephone()->save($telepon);
+                }
+                // if telephone null -> delete 
+                else {
+                    $siswa->telephone()->delete();
+                }
+            }
+            // if previous telephone column is null -> create
+            else {
+                if ($request->filled('nomor_telepon')) {
+                    $telepon = new Telephone;
+                    $telepon->nomor_telepon = $request->input('nomor_telepon');
+                    $siswa->telephone()->save($telepon);
+                }
+            }
             return redirect('student');
         }
     }

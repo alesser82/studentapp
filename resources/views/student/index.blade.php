@@ -4,7 +4,7 @@
     <div class="container my-3">
     <h3>Daftar Siswa</h3>
     @if (!empty($siswa_list))
-        <table class="table">
+        <table class="table table-responsive tablr">
             <thead>
                 <tr>
                     <th class="text-center">NISN</th>

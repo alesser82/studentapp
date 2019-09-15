@@ -2,6 +2,7 @@
 
 @section('main')
     <div class="container" id="siswa">
+        <div class="float-right"><a href="{{ URL::to('student') }}" class="btn btn-primary">Kembali</a></div>
         <h2 class="my-4">Ubah Data Siswa</h2>
 
         {{-- FORM WITH HTMLCOLLECTION --}}
@@ -16,6 +17,11 @@
             {!! Form::label('nama_siswa','Nama Siswa') !!}
             {!! Form::text('nama_siswa', null, ['class' => 'form-control', 'id' => 'nama_siswa']) !!}
             <span class="text-danger">{{ $errors->first('nama_siswa') }}</span>
+        </div>
+        <div class="form-group">
+            {!! Form::label('nomor_telepon','Nomor Telepon') !!}
+            {!! Form::text('nomor_telepon', null, ['class' => 'form-control', 'id' => 'nomor_telepon']) !!}
+            <span class="text-danger">{{ $errors->first('nomor_telepon') }}</span>
         </div>
         <div class="form-group">
             {!! Form::label('tanggal_lahir','Tanggal Lahir') !!}

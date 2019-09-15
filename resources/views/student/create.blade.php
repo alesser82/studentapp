@@ -2,6 +2,7 @@
 
 @section('main')
     <div class="container" id="siswa">
+        <div class="float-right"><a href="{{ URL::to('student') }}" class="btn btn-primary">Kembali</a></div>
         <h2 class="my-4">Tambah Siswa</h2>
         {{-- @include('errors.form_error_list') --}}
         <form action="{{ url('student') }}" method="POST">
@@ -18,6 +19,13 @@
             <input type="text" name="nama_siswa" id="nama_siswa" class="form-control {{ $errors->has('nama_siswa') ? 'border-danger' : '' }}" value="{{ Request::old('nama_siswa') }}">
         @if($errors->has('nama_siswa'))
             <span class="text-danger">{{ $errors->first('nama_siswa') }}</span>
+        @endif
+        </div>
+        <div class="form-group">
+            <label for="nomor_telepon">Nomor Telepon</label>
+            <input type="text" name="nomor_telepon" id="nomor_telepon" class="form-control {{ $errors->has('nomor_telepon') ? 'border-danger' : '' }}" value="{{ Request::old('nomor_telepon') }}">
+        @if($errors->has('nomor_telepon'))
+            <span class="text-danger">{{ $errors->first('nomor_telepon') }}</span>
         @endif
         </div>
         <div class="form-group">
