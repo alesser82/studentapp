@@ -15,15 +15,24 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($siswa_list as $siswa)
+            @foreach($siswa_list_page as $siswa)
                 <tr>
                     <td>{{ $siswa->nisn }}</td>
                     <td>{{ $siswa->nama_siswa }}</td>
                     <td>{{ $siswa->tanggal_lahir }}</td>
                     <td>{{ $siswa->jenis_kelamin }}</td>
                     <td>
-                        <a href="{{ URL::to('student/'.$siswa->id) }}" class="btn btn-success btn-sm">Detail</a>
-                        <a href="{{ URL::to('student/'.$siswa->id.'/edit') }}" class="btn btn-warning btn-sm">Ubah</a>
+                        <div class="box-button d-inline-block">
+                            <a href="{{ URL::to('student/'.$siswa->id) }}" class="btn btn-success btn-sm">Detail</a>
+                        </div>
+                        <div class="box-button d-inline-block">
+                            <a href="{{ URL::to('student/'.$siswa->id.'/edit') }}" class="btn btn-warning btn-sm">Ubah</a>
+                        </div>
+                        <div class="box-button d-inline-block">
+                            {!! Form::open(['method' => 'DELETE', 'action' => ['StudentController@destroy', $siswa->id]]) !!}
+                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                            {!! Form::close() !!}
+                        </div>
                     </td>
                 </tr>
             @endforeach
@@ -34,7 +43,7 @@
                 <strong>Jumlah siswa : {{ $jumlah_siswa }}</strong>
             </div>
             <div class="col-6 d-flex justify-content-end">
-                <span>Pagination</span>
+                {{ $siswa_list_page->links() }}
             </div>
         </div>
         <div class="row">
@@ -49,9 +58,15 @@
 @stop
 
 @if (!empty($siswa_list))
-    @section('footer')
-        @include('footer')
-    @stop
+    @if($jumlah_siswa_halaman > 6)
+        @section('footer')
+            @include('footer')
+        @stop
+    @else
+        @section('footer')
+            @include('footer_fixed')
+        @stop
+    @endif
 @else
     @section('footer')
         @include('footer_fixed')

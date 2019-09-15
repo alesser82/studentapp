@@ -10,9 +10,11 @@ class StudentController extends Controller
     public function index()
     {
         $siswa_list = Student::all()->sortBy('nama_siswa');
+        $siswa_list_page = Student::orderBy('nama_siswa', 'asc')->paginate(8);
         $jumlah_siswa = $siswa_list->count();
+        $jumlah_siswa_halaman = $siswa_list_page->count();
         // $createLink = $this->create();
-        return view('student.index', compact('siswa_list', 'jumlah_siswa'));
+        return view('student.index', compact('siswa_list', 'jumlah_siswa', 'siswa_list_page', 'jumlah_siswa_halaman'));
     }
 
     public function show($id)
@@ -55,4 +57,14 @@ class StudentController extends Controller
         $siswa->update($request->all());
         return redirect('student');
     }
+
+    public function destroy($id)
+    {
+        // Find data
+        $siswa = Student::findOrFail($id);
+        // Delete data
+        $siswa->delete();
+        return redirect('student');
+    }
+    
 }

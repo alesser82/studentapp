@@ -15,4 +15,17 @@ class Student extends Model
         'tanggal_lahir',
         'jenis_kelamin'
     ];
+    
+    // Mutator Name
+    public function setNamaSiswaAttribute($nama_siswa)
+    {
+        $this->attributes['nama_siswa'] = strtolower($nama_siswa);
+    }
+    
+    // Accessor Name
+    public function getNamaSiswaAttribute($nama_siswa)
+    {
+        return ucwords($nama_siswa);
+    }
+
 }
