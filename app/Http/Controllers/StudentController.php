@@ -71,12 +71,34 @@ class StudentController extends Controller
 
     public function update($id, Request $request)
     {
-        // Find data
-        $siswa = Student::findOrFail($id);
+        // // Find data
+        // $siswa = Student::findOrFail($id);
 
-        // Update
-        $siswa->update($request->all());
-        return redirect('student');
+        // // Update
+        // $siswa->update($request->all());
+        // return redirect('student');
+
+        // find student
+        $siswa= Student::findOrFail($id);
+        // get input
+        $input = $request->all();
+
+        // config validator
+        $validator = Validator::make($input, [
+            'nisn'          => 'required|size:4|unique:student,nisn,' . $request->id,
+            'nama_siswa'    => 'required|string|max:30',
+            'tanggal_lahir' => 'required|date',
+            'jenis_kelamin' => 'required|in:L,P',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('student/' . $id . '/edit')
+            ->withInput()
+            ->withErrors($validator);
+        }else {
+            $siswa->update($request->all());
+            return redirect('student');
+        }
     }
 
     public function destroy($id)
