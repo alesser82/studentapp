@@ -35,6 +35,7 @@ Route::get('secret-page', [
 ]);
 
 Route::get('showmesecret', 'SecretController@showMeSecret');
+Route::get('date-mutator', 'StudentController@dateMutator');
 
 //Insert Sample Data
 // Route::get('sampledata', function ()

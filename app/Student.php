@@ -15,6 +15,8 @@ class Student extends Model
         'tanggal_lahir',
         'jenis_kelamin'
     ];
+
+    protected $dates = ['tanggal_lahir'];
     
     // Mutator Name
     public function setNamaSiswaAttribute($nama_siswa)
