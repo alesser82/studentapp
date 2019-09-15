@@ -17,6 +17,12 @@ class Student extends Model
     ];
 
     protected $dates = ['tanggal_lahir'];
+
+    // Relationship one to one with telephone
+    public function telephone()
+    {
+        return $this->hasOne('App\Telephone', 'id_siswa');
+    }
     
     // Mutator Name
     public function setNamaSiswaAttribute($nama_siswa)

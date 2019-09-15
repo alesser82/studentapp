@@ -21,7 +21,8 @@ class StudentController extends Controller
     public function show($id)
     {
         $siswa = Student::findOrFail($id);
-        return view('student.show', compact( 'siswa'));
+        $umur = $this->dateMutator($id);
+        return view('student.show', compact( 'siswa','umur'));
     }
 
     public function create()
@@ -110,13 +111,15 @@ class StudentController extends Controller
         return redirect('student');
     }
 
-    public function dateMutator()
+    public function dateMutator($id)
     {
-        $siswa = Student::findOrFail(2);
+        $siswa = Student::findOrFail($id);
         $nama_siswa = $siswa->nama_siswa;
         $tanggal_lahir = $siswa->tanggal_lahir;
         $ulang_tahun = $siswa->tanggal_lahir->addYears(30)->format('d-m-Y');
-        return "Umur {$siswa->nama_siswa} adalah {$siswa->tanggal_lahir->age} tahun. Ulang tahun {$nama_siswa} ke-30 akan jatuh pada {$ulang_tahun}.";
+        $umur = $siswa->tanggal_lahir->age;
+        return $umur;
+        // return "Umur {$siswa->nama_siswa} adalah {$siswa->tanggal_lahir->age} tahun. Ulang tahun {$nama_siswa} ke-30 akan jatuh pada {$ulang_tahun}.";
     }
 
 }

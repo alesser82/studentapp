@@ -7,21 +7,23 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>NISN</th>
-                    <th>Nama</th>
-                    <th>Tanggal Lahir</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Aksi</th>
+                    <th class="text-center">NISN</th>
+                    <th class="text-center">Nama</th>
+                    <th class="text-center">Tanggal Lahir</th>
+                    <th class="text-center">Jenis Kelamin</th>
+                    <th class="text-center">Nomor Telepon</th>
+                    <th class="text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
             @foreach($siswa_list_page as $siswa)
                 <tr>
-                    <td>{{ $siswa->nisn }}</td>
-                    <td>{{ $siswa->nama_siswa }}</td>
-                    <td>{{ $siswa->tanggal_lahir->format('d-m-Y') }}</td>
-                    <td>{{ $siswa->jenis_kelamin }}</td>
-                    <td>
+                    <td class="text-center">{{ $siswa->nisn }}</td>
+                    <td class="text-center">{{ $siswa->nama_siswa }}</td>
+                    <td class="text-center">{{ $siswa->tanggal_lahir->format('d-m-Y') }}</td>
+                    <td class="text-center">{{ $siswa->jenis_kelamin }}</td>
+                    <td class="text-center">{{ !empty($siswa->telephone->nomor_telepon) ? $siswa->telephone->nomor_telepon : '-' }}</td>
+                    <td class="text-center">
                         <div class="box-button d-inline-block">
                             <a href="{{ URL::to('student/'.$siswa->id) }}" class="btn btn-success btn-sm">Detail</a>
                         </div>
